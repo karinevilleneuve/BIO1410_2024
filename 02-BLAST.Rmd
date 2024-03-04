@@ -1,0 +1,94 @@
+# BLAST
+
+Vous avez vue en classe une figure représentant l'abondance relative des principaux genres bactéries présents sous la langue ainsi que sur la paume de la main dominante de chacun des scientifiques de votre classe. Vous aimeriez maintenant générer une figure similaire à celle présentée en classe mais comprenant uniquement vos échantillons. Pour ce faire, vos démonstrateurs ont rédigé ce petit script R. Il vous suffit de suivre les étapes suivantes : 
+
+1. Télécharger le tableau de données (bio1410_2024.csv) à partir du lien suivant [LIEN]() et **l'enregistrer sur le bureau (desktop)** de l'ordinateur que vous utilisez. 
+
+2. Créer un nouveau document de type R markdown. 
+
+3. Insérer un nouveau bloc de code `R setup` indiquant le chemin vers le dossier/répertoire de travail par défault. 
+
+4. Insérer un nouveau bloc de code R et y copier/coller le script ci-dessous. 
+
+5. À la première ligne du code, copier/coller le nom de votre scientifique à partir de la liste des scienfitiques disponible au bas de la page. Attention, assurez-vous **de ne pas** avoir d'espace entre les guillemets et le nom. 
+
+6. Exécuter les commandes en appuyant sur le bouton vert en haut à droite du bloc de code (<font color='green'> ▶ </font>). 
+
+```{r, eval=FALSE}
+# Définir le nom de votre scientifique 
+ma_scientifique = "Abigail A. Salyers"
+
+# Importer le tableau de données
+tableau = read.table(file = "bio1410_2024.csv", sep=",", header=TRUE, check.names=FALSE) 
+# Définir le rang taxonomique d'intérêt 
+taxa_rank = "Genus"
+# Extraire vos échantillons 
+mes_échantillons = subset(tableau, Scientifique == ma_scientifique & Abundance > 0)
+
+# Afin de visualiser uniquementles 10 taxons les plus abondants on utilise ce qu'on appelle une *for loop* ou boucle en français 
+empt_df = list() # On génère une liste vide que l'on viendra populer avec les résultats de la foor loop
+i = 0 # Ensuite on définit un premier itérateur (de type numérique) qui compte le nombre de loop effectué
+# Début de la for loop
+for (région_échantillonnée in unique(mes_échantillons$Region)){ # Cette séquence est le début de la loop où l'itérateur de gauche (région) 
+    i = i + 1                                           # représente chaque item de l'itérateur de droite (mes_échantillons$Région)
+    sample = subset(mes_échantillons, Region == région_échantillonnée) # Générer une nouvelle table de données basée sur la variable définit par l'itérateur 
+    total_abundance = aggregate(sample$Abundance, by = list(taxa_rank = sample[[taxa_rank]]), FUN = sum) # Additionner ensemble les ASVs du même genres
+    top  =head(total_abundance[order(total_abundance$x, decreasing = T),], n = 10) # filtrer en order croissant pour identifer les 10 plus abondants
+    others_df=sample[!sample[[taxa_rank]] %in% top$taxa_rank,] # identifier les autres genres ne faisant pas partie des 10 plus abonants 
+    others_list = others_df[[taxa_rank]] # extraire leur nom du tableau de données dans une liste  
+    sample[sample[[taxa_rank]] %in% others_list,][[taxa_rank]] = "Autres" # Renommer leur genre pour Autres
+    empt_df[[i]] = sample # Enregistrer ce nouveau tableau 
+}
+df = do.call("rbind",empt_df) # Combiner les deux tables de données en une seule 
+
+
+# Maintenant que nous avons notre tableau de données avec seulement les 10 taxons les plus abondants sous la langue et la main
+# nous pouvons commencer à travailler sur le graphique. On commence par générer une liste de couleurs associées à chacun des taxons
+
+n = nrow(data.frame(unique(df$Genus))) # On calcule le nobre de genre unique que nous avons 
+palette = randomcoloR::distinctColorPalette(n) # On génère une nouvelle palette 
+my_scale = ggplot2::scale_fill_manual(name = as.character(taxa_rank), values = palette, na.translate = FALSE, drop = TRUE, limits = force) # On assigne une couleur à chacun de nos genres uniques 
+
+# Nous pouvons finalement générer le graphique 
+graphique = ggplot2::ggplot(df, aes(x = Region, weight = Abundance, fill = .data[[taxa_rank]])) +
+  facet_grid(~ Region, scales = "free") +
+  geom_bar() +
+  labs(y = "Abondance relative (%)") +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic() +
+  theme(text = element_text(size = 12), strip.text.x = element_blank(), 
+        plot.title = element_text(hjust = 0.5, margin = margin(0, 0, 50, 0))) + 
+  guides(fill = guide_legend(title = "Genre", title.position = "top")) + 
+  my_scale
+
+graphique # visualiser le graphique produit 
+
+# Enregistrer en format coma separeted value (csv) votre tableau d'abondance 
+write.csv(df, "df.csv", quote=FALSE, sep=",")
+```
+
+**Scientifiques** 
+
+    A - J                                                         K - V
+------------------                                      -----------------------------
+Abigail A. Salyers                                        Kalpana Chawla  
+Alice Augusta Ball                                        Khatijah Mohammad Yousoff 
+Ana Roque de Duprey                                       Leone Norwood Farrell   
+Angelina Fanny Hesse                                      Lise Meitner   
+Augusta Ada Byron Lovelace                                Margaret Elaine Heafield  Hamilton  
+Chien-Shiung Wu                                           Marie Maynard Daly Clark   
+Creola Katherine Coleman Johnson                          Marjory Stephenson    
+Dorothy Hodgkin                                           Mary Golda Ross      
+Dorothy Jean Johnson Vaughan                              Mary Jackson
+Elizabeth Bugie Gregory                                   Nettie Stevens    
+Elizabeth Garrett Anderson                                Rachel Carson  
+Emmanuelle Marie Charpentier                              Rosalind Elsie Franklin 
+Emmy Klieneberger-Nobel                                   Roseli Ocampo-Friedmann 
+Farah Alibay                                              Ruth Ella Moore
+Floy Agnes Naranjo Stroud Lee                             Sally Kristen Ride                           
+Frances Joan Estelle Wagner                               Vera Florence Cooper Rubin
+Gladys Mae Brown West              
+Jane Goodale                      
+Jessie Isabelle Price              
+Johanna Westerdijk                 
+June Dalziel Hart Almeida        
