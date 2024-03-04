@@ -2,7 +2,7 @@
 
 Vous avez vue en classe une figure représentant l'abondance relative des principaux genres bactéries présents sous la langue ainsi que sur la paume de la main dominante de chacun des scientifiques de votre classe. Vous aimeriez maintenant générer une figure similaire à celle présentée en classe mais comprenant uniquement vos échantillons. Pour ce faire, vos démonstrateurs ont rédigé ce petit script R. Il vous suffit de suivre les étapes suivantes : 
 
-1. Télécharger le tableau de données (bio1410_2024.csv) à partir du lien suivant [LIEN]() et **l'enregistrer sur le bureau (desktop)** de l'ordinateur que vous utilisez. 
+1. Télécharger le tableau de données [bio1410_2024.csv](https://ena01.uqam.ca/mod/folder/view.php?id=3413342) et **l'enregistrer sur le bureau (desktop)** de l'ordinateur que vous utilisez. 
 
 2. Créer un nouveau document de type R markdown. 
 
@@ -33,8 +33,8 @@ for (région_échantillonnée in unique(mes_échantillons$Region)){ # Cette séq
     i = i + 1                                           # représente chaque item de l'itérateur de droite (mes_échantillons$Région)
     sample = subset(mes_échantillons, Region == région_échantillonnée) # Générer une nouvelle table de données basée sur la variable définit par l'itérateur 
     total_abundance = aggregate(sample$Abundance, by = list(taxa_rank = sample[[taxa_rank]]), FUN = sum) # Additionner ensemble les ASVs du même genres
-    top  =head(total_abundance[order(total_abundance$x, decreasing = T),], n = 10) # filtrer en order croissant pour identifer les 10 plus abondants
-    others_df=sample[!sample[[taxa_rank]] %in% top$taxa_rank,] # identifier les autres genres ne faisant pas partie des 10 plus abonants 
+    top = head(total_abundance[order(total_abundance$x, decreasing = T),], n = 5) # filtrer en order croissant pour identifer les 10 plus abondants
+    others_df = sample[!sample[[taxa_rank]] %in% top$taxa_rank,] # identifier les autres genres ne faisant pas partie des 10 plus abonants 
     others_list = others_df[[taxa_rank]] # extraire leur nom du tableau de données dans une liste  
     sample[sample[[taxa_rank]] %in% others_list,][[taxa_rank]] = "Autres" # Renommer leur genre pour Autres
     empt_df[[i]] = sample # Enregistrer ce nouveau tableau 
@@ -64,7 +64,7 @@ graphique = ggplot2::ggplot(df, aes(x = Region, weight = Abundance, fill = .data
 graphique # visualiser le graphique produit 
 
 # Enregistrer en format coma separeted value (csv) votre tableau d'abondance 
-write.csv(df, "df.csv", quote=FALSE, sep=",")
+write.csv(df, "df.csv", quote=FALSE)
 ```
 
 **Scientifiques** 
