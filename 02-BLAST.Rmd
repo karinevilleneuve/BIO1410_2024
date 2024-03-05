@@ -1,23 +1,26 @@
-# BLAST
+# Tableau de mes ASVs et BLAST
 
-Vous avez vue en classe une figure représentant l'abondance relative des principaux genres bactéries présents sous la langue ainsi que sur la paume de la main dominante de chacun des scientifiques de votre classe. Vous aimeriez maintenant générer une figure similaire à celle présentée en classe mais comprenant uniquement vos échantillons. Pour ce faire, vos démonstrateurs ont rédigé ce petit script R. Il vous suffit de suivre les étapes suivantes : 
+Vous avez vue en classe une figure représentant l'abondance relative des principaux genres bactériens présents sous la langue ainsi que sur la paume de la main dominante de chacun des scientifiques de votre classe. Vous aimeriez maintenant générer une figure similaire à celle présentée en classe mais comprenant uniquement vos échantillons. Pour ce faire, vos démonstrateurs ont rédigé ce petit script R. Il vous suffit de suivre les étapes suivantes : 
 
 1. Télécharger le tableau de données [bio1410_2024.csv](https://ena01.uqam.ca/pluginfile.php/6291130/mod_folder/content/0/bio1410_2024.csv?forcedownload=1) et **l'enregistrer dans le dossier Documents** de l'ordinateur que vous utilisez. Si vous utilisez votre ordinateur personnel plutôt que celui de l'école vos démonstrateurs pourrons vous aider à spécifier le dossier le travail. 
 
 2. Créer un nouveau document de type R markdown. 
 
-4. Insérer un nouveau bloc de code R et y copier/coller le script ci-dessous. 
+4. Insérer deux blocs de code R et y copier/coller les blocs de code ci-dessous. 
 
-5. À la première ligne du code, copier/coller le nom de votre scientifique à partir de la liste des scienfitiques disponible au bas de la page. Attention, assurez-vous **de ne pas** avoir d'espace entre les guillemets et le nom. 
+5. À la première ligne du code, copier/coller le nom de votre scientifique à partir de la liste des scienfitiques disponible après les blocs des code. Attention, assurez-vous **de ne pas** avoir d'espace entre les guillemets et le nom. 
 
 6. Exécuter les commandes en appuyant sur le bouton vert en haut à droite du bloc de code (<font color='green'> ▶ </font>). 
 
+Bloc de code 1 : Installation des packages/libraires 
 ```{r, eval=FALSE}
 install.packages("randomcoloR")
 install.packages("ggplot2")
 library(ggplot2)
+```
 
-
+Bloc de code 2 : Script pour obtenir vos données
+```{r, eval=FALSE}
 # Définir le nom de votre scientifique 
 ma_scientifique = "Abigail A. Salyers"
 
@@ -70,7 +73,7 @@ graphique # visualiser le graphique produit
 write.csv(df, "df.csv", quote=FALSE)
 ```
 
-**Scientifiques** 
+## Scientifiques
 
     A - J                                                         K - V
 ------------------                                      -----------------------------
@@ -94,4 +97,42 @@ Gladys Mae Brown West
 Jane Goodale                      
 Jessie Isabelle Price              
 Johanna Westerdijk                 
-June Dalziel Hart Almeida        
+June Dalziel Hart Almeida     
+
+## Obtenir le tableau d'abondance de mes ASVs dans Excel
+
+Le fichier df.csv aura été enregistré dans votre working directory, soit le dossier Documents.
+
+1.	Ouvrir le fichier df.csv dans Excel
+2.	Dans Excel, sélectionner l’ensemble d’une colonne (par ex. en cliquant sur l’en-tête ‘A’).
+3.	Aller dans l’onglet `Données`, cliquer sur `Convertir.`
+4.	À « Choisisser le type de fichier qui décrit le mieux vos données », sélectionner `Délimité.` Cliquer sur `Suivant.`
+5.	Sélectionner le séparateur `Virgule.` Cliquer sur `Terminer.`
+6.	Dans l'onglet `Données`, cliquer sur `Trier`. Sélection Trier par Région, ordre de A à Z. Cliquer sur `Ajouter un niveau`, sélectionner Puis par abundance, ordre de Z à A.
+7.	Copier la séquence de nucléotides de l’ASV le plus abondant de la paume (colonne M; Séquence). 
+8.	Faire l’exercice BLAST ci-bas avec l’ASV le plus abondant de la paume, puis après, avec l’ASV le plus abondant sous la langue.
+
+## BLAST
+
+Analyse de l'identité taxonomique de séquences microbiennes du gène d'ARNr 16S 
+
+**Méthod**
+
+1. Se rendre sur le logiciel en ligne [BLAST du NCBI](https://blast.ncbi.nlm.nih.gov/Blast.cgi)  
+2. Choisir l'analyse `Nucleotide BLAST` (`BLASTn`) 
+3. Copier votre séquence dans la boîte de dialogue 
+4. Choisir la banque de données appropriée à laquelle comparer votre séquence 
+  - Utiliser la collection de nucléotides 
+  - Exclure les organismes environnementaux et non cultivés
+  - Choisir l'algorithme de BLAST désiré (essayer à la fois les algorithmes` BLASTn` et` MegaBLAST`
+5. Lancer l'analyse (bouton `BLAST`). 
+6. Après lecture et analyse du fichier sortant effectuer un imprime-écran incluant les trois premiers résultats de l’analyse (trois premiers taxons identifiés). Vous devrez inclure cette image dans l’annexe de votre travail. Réalisez un tableau à inclure dans le corps du texte comprenant les colonnes suivantes; 
+  - Per. Ident.
+  - Query cover
+  - E.value
+  
+Vous pouvez aussi consulter pour votre plaisir personnel : 
+
+- Le rapport de taxonomie (taxonomy report)
+- L’arbre des distances entre les meilleurs résultats (distance tree of results) 
+

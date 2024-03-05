@@ -5,6 +5,9 @@ utliser-r-markdowm
 bloc-de-codes
 définir-le-répertoire-de-travail-par-défault
 importer-des-données
+tableau-de-mes-asvs-et-blast
+scientifiques
+obtenir-le-tableau-dabondance-de-mes-asvs-dans-excel
 blast
 traitement-des-fastqs
 pré-analyse

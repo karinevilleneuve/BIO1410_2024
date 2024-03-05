@@ -16,7 +16,7 @@ Ce petit guide à été rédigé à l'intention des élèves du cours BIO1410 af
 
 Avant de débuter toute analyse, il est nécessaire de comprendre les principales fonctionnalités de R. La permière section [Introduction à R Studio et R Markdown] présente donc très brièvement comment utiliser R Mardown avec R Studio. 
 
-Par la suite, la section [BLAST] comprend un petit script R permettant à l'élève d'identifier les 10 genres bactériens les plus abondants dans ses échantillons récoltés sous sa langue ainsi que sur la paume de sa mains. Ce script permet aussi de générer un tableau de données en format *comma seperated value* (csv) que l'étudiant devra utiliser pour obtenir les séquences d'acides nucléiques à rechercher sur la base de données du National Center for Biotechnology Information (NCBI) avec leur outil *Basic Local Alignment Search Tool* ([BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi)). 
+Par la suite, la section [Tableau de mes ASVs et BLAST] comprend un petit script R permettant à l'élève d'identifier les 10 genres bactériens les plus abondants dans ses échantillons récoltés sous sa langue ainsi que sur la paume de sa mains. Ce script permet aussi de générer un tableau de données en format *comma seperated value* (csv) que l'étudiant devra utiliser pour obtenir les séquences d'acides nucléiques à rechercher sur la base de données du National Center for Biotechnology Information (NCBI) avec leur outil *Basic Local Alignment Search Tool* ([BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi)). 
 
 La section [Traitement des fastqs] présente ensuite comment les données brutes du séquençage d'amplicon du gène ARNs 16S ont été traitées dans R afin d'obtenir une matrice de l'abondance relative des variants de séquence d'amplicon (ASVs) par échantillon. 
 
