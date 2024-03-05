@@ -2,11 +2,9 @@
 
 Vous avez vue en classe une figure représentant l'abondance relative des principaux genres bactéries présents sous la langue ainsi que sur la paume de la main dominante de chacun des scientifiques de votre classe. Vous aimeriez maintenant générer une figure similaire à celle présentée en classe mais comprenant uniquement vos échantillons. Pour ce faire, vos démonstrateurs ont rédigé ce petit script R. Il vous suffit de suivre les étapes suivantes : 
 
-1. Télécharger le tableau de données [bio1410_2024.csv](https://ena01.uqam.ca/mod/folder/view.php?id=3413342) et **l'enregistrer sur le bureau (desktop)** de l'ordinateur que vous utilisez. 
+1. Télécharger le tableau de données [bio1410_2024.csv](https://ena01.uqam.ca/pluginfile.php/6291130/mod_folder/content/0/bio1410_2024.csv?forcedownload=1) et **l'enregistrer dans le dossier Documents** de l'ordinateur que vous utilisez. Si vous utilisez votre odirnateur personnel plutôt que celui de l'école les démonstrateurs vous aiderons à spécifier le dossier le travail. 
 
 2. Créer un nouveau document de type R markdown. 
-
-3. Insérer un nouveau bloc de code `R setup` indiquant le chemin vers le dossier/répertoire de travail par défault. 
 
 4. Insérer un nouveau bloc de code R et y copier/coller le script ci-dessous. 
 
@@ -15,6 +13,8 @@ Vous avez vue en classe une figure représentant l'abondance relative des princi
 6. Exécuter les commandes en appuyant sur le bouton vert en haut à droite du bloc de code (<font color='green'> ▶ </font>). 
 
 ```{r, eval=FALSE}
+install.packages("randomcoloR")
+
 # Définir le nom de votre scientifique 
 ma_scientifique = "Abigail A. Salyers"
 

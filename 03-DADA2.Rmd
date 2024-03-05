@@ -15,7 +15,7 @@ library(phyloseq)
 library(DECIPHER)
 ```
 
-Avant de commencer il faut identifier les échantillons présents dans le dossier de travail et extraire le nom de ces deniers sans les artefacts du séquençage. 
+Identifier les échantillons présents dans le dossier de travail et extraire le nom de ces deniers sans les artefacts ajoutés lors du séquençage. 
 ```{r, eval = FALSE}
 # Créer une variable qui définit le lien vers le dossier contenant tous les fichiers en format fastq
 path = "~/BIO1410/2023/raw_fastqs"  

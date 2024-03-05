@@ -53,11 +53,11 @@ Plusieurs autres options peuvent être appliqués sur les blocs, pour plus d'inf
 
 ### Définir le répertoire de travail par défault 
 
-Généralement, avant de commencer à analyser des données, il faut indiquer à R où se trouve les données sur notre ordinateur. Il existe plusieurs manières de procéder, dont notamment, spécifier au début du script un répertoire/dossier de travail par défault. Pour ce faire, une suffit d'insérer un bloc de code `R setup` comme celui présenté ci-dessous. Le texte entre les guillemets doit simplement être modifié pour le vrai chemin vers votre répertoire/dossier de travail. Une fois le repertoire de travail définit par défaut de la sorte il n'est pas nécessaire d'inclure le chemin vers les fichiers que l'on veut importer tant qu'il se trouve dans le répertoire spécifié. Cela s'applique aussi à la sauvegarde de tableaux, figures ou autres. 
+Généralement, avant de commencer à analyser des données, il faut indiquer à R où se trouve les données sur notre ordinateur. Il existe plusieurs manières de procéder, dont notamment, spécifier au début du script un répertoire/dossier de travail par défault. Pour ce faire, une suffit d'utiliser la commande `setwd()` comme présenté sur l'exemple ci-dessous. Le texte entre les guillemets de l'exemple doit simplement être modifié pour le vrai chemin vers votre répertoire/dossier de travail. Une fois le repertoire de travail définit par défaut de la sorte il n'est pas nécessaire d'inclure le chemin vers les fichiers que l'on veut importer tant qu'il se trouve dans le répertoire spécifié. Cela s'applique aussi à la sauvegarde de tableaux, figures ou autres. 
 
 ````{verbatim, lang = "python"}
-```{r setup} 
-knitr::opts_knit$set(root.dir="/chemin/vers/le/répertoire/")
+```{r} 
+setwd("/chemin/vers/le/répertoire/")
 ```
 ```` 
 ### Importer des données
