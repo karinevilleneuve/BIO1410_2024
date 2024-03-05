@@ -15,6 +15,7 @@ Vous avez vue en classe une figure représentant l'abondance relative des princi
 ```{r, eval=FALSE}
 install.packages("randomcoloR")
 install.packages("ggplot2")
+library(ggplot2)
 
 
 # Définir le nom de votre scientifique 
