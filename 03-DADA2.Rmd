@@ -55,7 +55,7 @@ plotQualityProfile(fnRs, aggregate = TRUE)
 knitr::include_graphics("data/plotqualityprofile.png")
 ```
 
-L’analyse de ces graphiques nous permet donc de choisir les paramètres de filtrage et de rognage de la prochaine étape. La qualité des séquences du brin Forward est généralement de meilleur qualité que celle des séquences du brin Reverse.L'intégralité du brin Forward (250 nucléotides) est d'assez bonnes qualité pour le conserver entier alors que pour le brin Reverse nous supprimerons les nucléotides après la position 240. En observant les graphiques générés, vous pouvesz constater que le début des séquences est aussi de moins bonne qualité et comprends les amorces que nous devons retirer. 
+L’analyse de ces graphiques nous permet donc de choisir les paramètres de filtrage et de rognage de la prochaine étape. La qualité des séquences du brin Forward est généralement de meilleur qualité que celle des séquences du brin Reverse. L'intégralité du brin Forward (250 nucléotides) est d'assez bonnes qualité pour le conserver entier alors que pour le brin Reverse nous supprimerons les nucléotides après la position 240. En observant les graphiques générés, vous pouvesz constater que le début des séquences est aussi de moins bonne qualité et comprend les amorces que nous devons retirer. 
 
 **Filtrer et rogner les séquences** 
 
